@@ -14,6 +14,8 @@ with the clause it relied on.
 
 COMP 422.001 — Amon Crenshaw, Paris Frederick, Lauryn Jones, Charlestone Mayenga
 
+**Live demo: [can-i-share-this.streamlit.app](https://can-i-share-this.streamlit.app)** (free hosting; the first visit after a quiet spell can take about 30 seconds to wake. Each visitor session is limited to 20 questions.)
+
 ---
 
 ## Quick start
@@ -265,6 +267,9 @@ Worth knowing, because they are the honest "what we learned":
 | `CISH_MAX_RETRIES` | `8` | retries on per-minute rate limits (429), waiting as the provider asks |
 | `CISH_MAX_TOKENS` | `700`+ | output budget; reasoning models spend part of it thinking |
 | `CISH_REASONING_EFFORT` | `low` for gpt-oss | `low`, `medium` or `high` |
+| `CISH_MAX_QUESTIONS` | `20` | questions per visitor session in the app (`0` = unlimited) |
+| `CISH_DAILY_CAP` | `400` | questions per day across all visitors (`0` = unlimited) |
+| `CISH_MAX_CHARS` | `600` | longest accepted question |
 | `CISH_SKIP_MODEL_ON_BLOCK` | off | `1` skips the verdict call when a hard rule already says DO NOT SHARE (fewer calls, same verdict) |
 
 ## References
