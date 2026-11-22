@@ -1,0 +1,103 @@
+# Evaluation scenarios for Can I Share This?
+# Each scenario carries paraphrases so we can measure whether the verdict
+# stays stable when the wording changes (Rabanser et al., 2026).
+
+- id: S01
+  requester: e001
+  expected: DO NOT SHARE
+  question: "Can I upload our customer list to ChatGPT to clean up the formatting?"
+  paraphrases:
+    - "Is it ok to paste the customer spreadsheet into ChatGPT so it can tidy the columns?"
+    - "I want to use ChatGPT to reformat a customer export. Allowed?"
+    - "Quick one - customer list into ChatGPT for formatting help, fine?"
+    - "Can I drop our full customer file into the free ChatGPT to fix the layout?"
+
+- id: S02
+  requester: e002
+  expected: DO NOT SHARE
+  question: "Can I email an employee's performance review to my personal Gmail so I can read it tonight?"
+  paraphrases:
+    - "I want to forward a performance review to my own Gmail to finish at home. Ok?"
+    - "Is sending one employee review to my personal email address allowed?"
+    - "Can I send myself an HR performance document at my personal Gmail?"
+    - "Forwarding a staff review to my private email just for tonight - allowed?"
+
+- id: S03
+  requester: e004
+  expected: SAFE
+  question: "Can I share our team's sprint planning notes with another engineer in corporate Slack?"
+  paraphrases:
+    - "Is it fine to post internal sprint notes to a coworker on company Slack?"
+    - "Can I send team planning docs to another employee over our corporate Slack?"
+    - "Sharing internal meeting notes with a colleague in company Slack - ok?"
+    - "May I pass our internal planning document to another engineer via corporate Slack?"
+
+- id: S04
+  requester: e004
+  expected: DO NOT SHARE
+  question: "Can I put the database password in a Slack message to my teammate?"
+  paraphrases:
+    - "Is it ok to send our DB connection string over corporate Slack to a coworker?"
+    - "Can I share an API key with another engineer in Slack?"
+    - "Sending the production password to my teammate on Slack - allowed?"
+    - "May I message a database credential to a colleague through company Slack?"
+
+- id: S05
+  requester: e003
+  expected: DO NOT SHARE
+  question: "Can I take a photo of the Q3 forecast on my personal phone?"
+  paraphrases:
+    - "Is photographing our unreleased financial forecast with my own phone allowed?"
+    - "Can I snap a picture of the budget sheet on my personal device?"
+    - "Taking a phone photo of the Q3 financials - ok?"
+    - "May I use my personal phone camera to capture the forecast page?"
+
+- id: S06
+  requester: e001
+  expected: DO NOT SHARE
+  question: "Can I export 5,000 customer records and send them to an outside marketing agency?"
+  paraphrases:
+    - "We want to send thousands of customer rows to an external marketing firm. Allowed?"
+    - "Can I share a bulk customer export with an outside agency?"
+    - "Sending 5000 customer records to a third-party marketer - ok?"
+    - "Is a large customer data transfer to an external marketing company permitted?"
+
+- id: S07
+  requester: e004
+  expected: DO NOT SHARE
+  question: "Can I copy the customer database to a USB drive?"
+  paraphrases:
+    - "Is moving customer records onto an external hard drive allowed?"
+    - "Can I put customer data on a thumb drive to take home?"
+    - "Copying the customer table to removable media - ok?"
+    - "May I save a customer export onto a USB stick?"
+
+- id: S08
+  requester: e001
+  expected: DO NOT SHARE
+  question: "Can I look up an employee's salary and send it to a coworker on Slack?"
+  paraphrases:
+    - "Is it ok for me to share another employee's pay information over Slack?"
+    - "Can I pass along a colleague's compensation details to a teammate?"
+    - "Sharing staff salary info with a coworker in corporate Slack - allowed?"
+    - "May I send employee compensation data to another employee?"
+
+- id: S09
+  requester: e004
+  expected: CHECK POLICY
+  question: "Can I use a new AI transcription service for our internal team meetings?"
+  paraphrases:
+    - "We want to try an unapproved transcription tool on internal meetings. Ok?"
+    - "Is using a third-party AI note taker for team meetings allowed?"
+    - "Can I run our internal standup through a new AI transcription app?"
+    - "May I use an AI meeting recorder that isn't on the approved list?"
+
+- id: S10
+  requester: e005
+  expected: CHECK POLICY
+  question: "Can I share a customer support transcript with our approved cloud vendor?"
+  paraphrases:
+    - "Is sending a customer support conversation to an approved vendor allowed?"
+    - "Can I pass one customer transcript to a vendor we have an agreement with?"
+    - "Sharing a single support thread with an approved third party - ok?"
+    - "May I give an approved vendor a customer service transcript?"

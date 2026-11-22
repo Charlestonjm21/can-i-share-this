@@ -1,0 +1,10 @@
+# Core dependencies. Pure wheels on every platform, no model downloads.
+streamlit>=1.38.0
+pydantic>=2.8.0
+PyYAML>=6.0
+scikit-learn>=1.3.0
+
+# No SDK is needed for the default provider (Groq) or for any other
+# OpenAI-compatible endpoint or Ollama - those use stdlib urllib.
+# Install this only if you set CISH_PROVIDER=anthropic.
+# anthropic>=0.40.0

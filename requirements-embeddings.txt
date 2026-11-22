@@ -1,0 +1,6 @@
+# Optional: the dense-embedding retrieval backend (CISH_RETRIEVER=embedding).
+# Pulls in PyTorch, roughly 2 GB. Only install this if you are running the
+# retrieval comparison experiment.
+-r requirements.txt
+chromadb>=0.5.0
+sentence-transformers>=3.0.0

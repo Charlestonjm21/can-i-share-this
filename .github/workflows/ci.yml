@@ -1,0 +1,29 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install
+        run: pip install -r requirements-dev.txt
+
+      # The corpus, rules engine, and retrieval layer are deterministic, so
+      # they run here with no API key and no secrets. The model-dependent
+      # scenario harness (evaluate.py) is run manually; see the README.
+      - name: Run tests
+        run: python -m pytest tests/ -v
