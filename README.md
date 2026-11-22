@@ -150,7 +150,24 @@ the false-SAFE rate stays at zero, the safety property held. Any two
 providers can be compared — a hosted 120B open-weights model against a local
 8B one, or either against a frontier model.
 
-<!-- RESULTS: paste the evaluate.py output here once you have run it -->
+### Results
+
+Measured with `gpt-oss-120b` on Groq's free tier and TF-IDF retrieval, 10 scenarios x 5 phrasings = 50 runs. Raw per-scenario output is in [`results_final.csv`](results_final.csv).
+
+| Criterion | First full run | Final run | Target |
+|---|---|---|---|
+| `error_rate` | 0.00 | 0.00 | 0.0 |
+| `unsafe_safe_rate` | 0.00 | **0.00** | 0.0 |
+| `consistency_rate` | 0.50 | **1.00** | >= 0.95 |
+| `accuracy` | 0.90 | **0.90** | >= 0.90 |
+
+Nine of ten scenarios match the expected verdict. The tenth (S09, "use a new AI transcription service") is disputed rather than simply wrong: policy clause AI-3.1 forbids company data in consumer AI services, while AI-5.1 says to file a request with Information Security. The agent answers DO NOT SHARE (the stricter reading); the scenario was labelled CHECK POLICY.
+
+**What the first run taught us.** Consistency of 0.50 looked like model noise. A per-stage diagnostic (`scripts/diagnose.py`) showed the model was extracting correctly and the bug was in our pipeline: clarifying questions were asked before the hard rules ran, so an unmentioned channel could downgrade a clear DO NOT SHARE to CHECK POLICY, and a "volume unknown" answer flipped a SAFE case. Running the rules first and not requiring volume fixed both, with regression tests.
+
+**Caveats.** Ten scenarios is a small test, and the system was adjusted while looking at them, so these figures are likely optimistic on unseen questions. A held-out set is the first planned improvement.
+
+
 
 ---
 
