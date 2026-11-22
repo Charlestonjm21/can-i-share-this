@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import streamlit as st
 
-from cish import agent, directory, llm
+from cish import agent, directory, limits, llm
 from cish.schema import Verdict
 
 VERDICT_STYLE = {
@@ -17,6 +17,13 @@ VERDICT_STYLE = {
 }
 
 st.set_page_config(page_title="Can I Share This?", page_icon="🔐")
+
+
+@st.cache_resource
+def daily_counter() -> limits.DailyCounter:
+    """One counter shared by every visitor of this running app."""
+    return limits.DailyCounter()
+
 
 st.title("Can I Share This?")
 st.caption(
@@ -59,6 +66,22 @@ for item in st.session_state.history:
 question = st.chat_input("e.g. Can I upload this customer list to ChatGPT?")
 
 if question:
+    cap = limits.max_questions()
+    asked = st.session_state.get("asked", 0)
+    if len(question) > limits.max_chars():
+        st.warning(f"Please keep the question under {limits.max_chars()} "
+                   f"characters. Describe the action, do not paste the data.")
+        st.stop()
+    if cap and asked >= cap:
+        st.warning(f"This demo allows {cap} questions per session. "
+                   f"Refresh the page to start a new session.")
+        st.stop()
+    if not daily_counter().try_take(limits.daily_cap()):
+        st.warning("The demo has reached its daily limit to protect a shared "
+                   "free quota. Please try again tomorrow, or run it "
+                   "locally with your own key (see the README).")
+        st.stop()
+    st.session_state.asked = asked + 1
     st.session_state.history.append({"role": "user", "content": question})
     with st.chat_message("user"):
         st.markdown(question)
